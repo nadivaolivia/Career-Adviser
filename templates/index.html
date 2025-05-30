@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Advisor AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🧠 Career Advisor AI</h1>
+            <p>Penasihat Karir Berbasis Kecerdasan Buatan</p>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('profile')">📋 Profil</button>
+            <button class="tab-btn" onclick="showTab('test')">🧭 Tes Kepribadian</button>
+            <button class="tab-btn" onclick="showTab('results')">💡 Hasil</button>
+        </nav>
+
+        <!-- Profile Tab -->
+        <div id="profile" class="tab-content active">
+            <h2>📋 Data Profil</h2>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label>Nama:</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Pendidikan:</label>
+                    <select id="education" required>
+                        <option value="">Pilih pendidikan...</option>
+                        <option value="SMA">SMA/SMK</option>
+                        <option value="D3">Diploma 3</option>
+                        <option value="S1">Sarjana (S1)</option>
+                        <option value="S2">Magister (S2)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Pengalaman Kerja (tahun):</label>
+                    <input type="number" id="experience" min="0" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label>Bidang Minat:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" value="Teknologi"> Teknologi</label>
+                        <label><input type="checkbox" value="Bisnis"> Bisnis</label>
+                        <label><input type="checkbox" value="Kreatif"> Kreatif</label>
+                        <label><input type="checkbox" value="Keuangan"> Keuangan</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Keterampilan (pisahkan dengan koma):</label>
+                    <textarea id="skills" placeholder="Contoh: Programming, Excel, Design, dll."></textarea>
+                </div>
+
+                <button type="submit" class="btn">💾 Simpan Profil</button>
+            </form>
+        </div>
+
+        <!-- Test Tab -->
+        <div id="test" class="tab-content">
+            <h2>🧭 Tes Kepribadian</h2>
+            <div id="testContainer">
+                <p>Loading...</p>
+            </div>
+            <button id="submitTest" class="btn" onclick="submitTest()" disabled>🎯 Selesaikan Tes</button>
+        </div>
+
+        <!-- Results Tab -->
+        <div id="results" class="tab-content">
+            <h2>💡 Rekomendasi Karir</h2>
+            <div id="resultsContainer">
+                <p>Lengkapi profil dan tes kepribadian untuk melihat rekomendasi.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
