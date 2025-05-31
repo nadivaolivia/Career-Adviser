@@ -76,3 +76,38 @@ async function loadPersonalityTest() {
     }
 }
 
+// Update test progress
+function updateTestProgress() {
+    const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+    document.getElementById('submitTest').disabled = answered < testQuestions.length;
+}
+
+// Submit test
+async function submitTest() {
+    testAnswers = [];
+    
+    testQuestions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selected) {
+            testAnswers.push(parseInt(selected.value));
+        }
+    });
+    
+    try {
+        const response = await fetch('/api/submit-test', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({answers: testAnswers})
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+            showAlert('Tes berhasil diselesaikan!');
+            loadRecommendations();
+        }
+    } catch (error) {
+        showAlert('Error: ' + error.message);
+    }
+}
+
+
