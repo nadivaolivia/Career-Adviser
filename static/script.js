@@ -149,5 +149,19 @@ async function loadRecommendations() {
     }
 }
 
+// Show alert
+function showAlert(message) {
+    const alert = document.createElement('div');
+    alert.className = 'alert';
+    alert.textContent = message;
+    document.querySelector('.container').insertBefore(alert, document.querySelector('.nav-tabs'));
+    
+    setTimeout(() => alert.remove(), 3000);
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    loadPersonalityTest();
+});
 
 
