@@ -110,4 +110,44 @@ async function submitTest() {
     }
 }
 
+// Load recommendations
+async function loadRecommendations() {
+    try {
+        const response = await fetch('/api/recommendations');
+        const recommendations = await response.json();
+        
+        if (recommendations.error) {
+            document.getElementById('resultsContainer').innerHTML = 
+                `<p>${recommendations.error}</p>`;
+            return;
+        }
+        
+        const container = document.getElementById('resultsContainer');
+        container.innerHTML = '';
+        
+        recommendations.forEach(rec => {
+            const recDiv = document.createElement('div');
+            recDiv.className = 'recommendation-card';
+            recDiv.innerHTML = `
+                <div class="career-title">${rec.career}</div>
+                <div class="match-score">Match: ${rec.score}% (${rec.match_level})</div>
+                <p><strong>Kategori:</strong> ${rec.category}</p>
+                <p><strong>Deskripsi:</strong> ${rec.description}</p>
+                <p><strong>Gaji:</strong> ${rec.salary_range}</p>
+                <p><strong>Skills:</strong> ${rec.required_skills.join(', ')}</p>
+                <div class="reasoning">
+                    <strong>Alasan Rekomendasi:</strong>
+                    <ul>
+                        ${rec.reasoning.map(reason => `<li>${reason}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            container.appendChild(recDiv);
+        });
+    } catch (error) {
+        console.error('Error loading recommendations:', error);
+    }
+}
+
+
 
